@@ -1,45 +1,65 @@
-from kivy.lang import Builder
-from kivy.properties import ListProperty, StringProperty, NumericProperty, ObjectProperty
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.clock import Clock
-from kivymd.app import MDApp
-from kivy.metrics import dp
-from kivy.core.window import Window
-from kivy.storage.jsonstore import JsonStore
-from kivy.properties import StringProperty, NumericProperty
-from kivymd.uix.snackbar import BaseSnackbar
-import random
-from kivy.config import Config
-from kivymd.color_definitions import colors
-from kivy.uix.button import Button
-from kivy.uix.image import Image
-from kivy.core.audio import SoundLoader
-import json
+ScreenManager:
+    HomeScreen:
+    AboutScreen:
+    ContactScreen:
 
+<HomeScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint:1,1
+        MDLabel:
+            text: 'Home Screen'
+        MDFillRoundFlatIconButton:
+            icon:"play"
+            md_bg_color: "#F45050"
+            pos_hint: {'center_x': 0.2,'center_y': 0.9}
+            icon_size:30
+            text:"Start"
+            text_color:"#F0F0F0"
+            line_color: "#F0F0F0"
+            icon_color:"#F0F0F0"
+            size_hint_x:.2
+            line_height: .8
+            on_press:root.click()        
+            MDFloatLayout:
+                Image:
+                    id: score_image
+                    source:"image/Golden1.png"
+                    size_hint: (1), (1)
+                    pos_hint: {'center_x':0.8 ,'center_y': 0.06}
+                Image:
+                    source:"image/chimpon.png"
+                    size_hint: (0.13), (0.13)
+                    pos_hint: {'center_x':0.56 ,'center_y': 0.34}
+                Image:
+                    source:"image/giphy.gif"
+                    allow_stretch: True
+                    anim_delay: 0.03
+                    size_hint:(0.7),(0.7)
+                    # anim_loop: 3
+                    pos_hint: {'center_x': 0.5,'center_y': 0.5}
 
-class HomeScreen(Screen):
-    def click(self):
-        app = App.get_running_app()
-        app.root.current = "About"
-    
+<AboutScreen>:
+    name:"About"
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'About Screen'
+        Button:
+            text: 'Go to Home Screen'
+            on_press: root.manager.current = 'home'
+        Button:
+            text: 'Go to Contact Screen'
+            on_press: root.manager.current = 'contact'
 
-class AboutScreen(Screen):
-    pass
-
-
-class ContactScreen(Screen):
-    pass
-
-
-class App(MDApp):
-    def build(self):
-        sm = ScreenManager()
-        sm.add_widget(HomeScreen(name='home'))
-        sm.add_widget(AboutScreen(name='about'))
-        sm.add_widget(ContactScreen(name='contact'))
-        kv = Builder.load_file('kivy.kv')
-        return kv
-
-
-if __name__ == '__main__':
-    App().run()
+<ContactScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Contact Screen'
+        Button:
+            text: 'Go to Home Screen'
+            on_press: root.manager.current = 'home'
+        Button:
+            text: 'Go to About Screen'
+            on_press: root.manager.current = 'about'
