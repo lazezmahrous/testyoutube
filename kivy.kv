@@ -1,0 +1,41 @@
+ScreenManager:
+    HomeScreen:
+    AboutScreen:
+    ContactScreen:
+
+<HomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Home Screen'
+        Button:
+            text: 'Go to About Screen'
+            on_press: root.manager.current = 'About'
+        Button:
+            text: 'Go to Contact Screen'
+            on_press: root.click()
+
+<AboutScreen>:
+    name:"About"
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'About Screen'
+        Button:
+            text: 'Go to Home Screen'
+            on_press: root.manager.current = 'home'
+        Button:
+            text: 'Go to Contact Screen'
+            on_press: root.manager.current = 'contact'
+
+<ContactScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Contact Screen'
+        Button:
+            text: 'Go to Home Screen'
+            on_press: root.manager.current = 'home'
+        Button:
+            text: 'Go to About Screen'
+            on_press: root.manager.current = 'about'
